@@ -19,24 +19,7 @@ struct HomeView: View {
                 .edgesIgnoringSafeArea(.all)
             
             VStack {
-                HStack {
-                    Text("Watching")
-                        .font(.system(size: 28, weight: .bold))
-                    
-                    Spacer()
-                    
-                    Button(action: {
-                        self.showProfile.toggle()
-                    }, label: {
-                        Image("Avatar")
-                            .renderingMode(.original)
-                            .resizable()
-                            .frame(width: 36, height: 36)
-                            .clipShape(Circle())
-                    })
-                }
-                .padding(.horizontal)
-                .padding(.top, 30)
+                NavView(showProfile: $showProfile)
                 
                 Spacer()
             }
