@@ -12,8 +12,8 @@ struct SectionListView: View {
     var body: some View {
         ScrollView(.horizontal, showsIndicators: false) {
             HStack(spacing: 30.0) {
-                ForEach(0 ..< 3) { item in
-                    SectionView()
+                ForEach(sectionCourseData) { courseSection in
+                    SectionView(courseSection: courseSection)
                 }
             }
             .padding(.top, 30)
@@ -24,23 +24,27 @@ struct SectionListView: View {
 }
 
 struct SectionView: View {
+    
+    var courseSection : CourseSection
+    
     var body: some View {
-        VStack(spacing: 16.0) {
+        VStack {
             HStack(alignment: .top) {
-                Text("Prototype designs in SwiftUI")
+                Text(courseSection.title)
                     .font(.system(size: 24, weight: .bold))
                     .frame(width: 160, alignment: .leading)
                     .foregroundColor(Color.white)
                 
                 Spacer()
                 
-                Image("Logo1")
+                Image(courseSection.logo)
             }
             
-            Text("18 Sections".uppercased())
+            Text(courseSection.subtitle.uppercased())
                 .frame(maxWidth: .infinity, alignment: .leading)
+                .foregroundColor(.white)
             
-            Image("Card1")
+            courseSection.bgImage
                 .resizable()
                 .aspectRatio(contentMode: .fit)
                 .frame(width: 210)
@@ -48,9 +52,9 @@ struct SectionView: View {
         .padding(.top, 20)
         .padding(.horizontal, 20)
         .frame(width: 275, height: 275)
-        .background(Color("card1"))
+        .background(courseSection.color)
         .cornerRadius(30)
-        .shadow(color: Color("card1").opacity(0.3), radius: 20, x: 0, y: 20)
+        .shadow(color: courseSection.color.opacity(0.3), radius: 20, x: 0, y: 20)
     }
 }
 
