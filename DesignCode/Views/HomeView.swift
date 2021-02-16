@@ -21,6 +21,8 @@ struct HomeView: View {
             VStack {
                 NavView(showProfile: $showProfile)
                 
+                SectionListView()
+                
                 Spacer()
             }
             .padding(.top, 44)
@@ -30,7 +32,7 @@ struct HomeView: View {
             .offset(y: self.showProfile ? -450: 0)
             .scaleEffect(self.showProfile ? 0.9 : 1)
             .rotation3DEffect(Angle(degrees: self.showProfile ? -10 : 0), axis: (x: 10, y: 0, z: 0))
-            .animation(.easeInOut)
+            .animation(.spring(response: 0.5, dampingFraction: 0.6, blendDuration: 0))
             .edgesIgnoringSafeArea(.all)
             
             MenuView()
