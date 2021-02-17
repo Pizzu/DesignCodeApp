@@ -11,9 +11,16 @@ import SwiftUI
 struct SectionListView: View {
     var body: some View {
         ScrollView(.horizontal, showsIndicators: false) {
-            HStack(spacing: 30.0) {
+            HStack(spacing: 20.0) {
                 ForEach(sectionCourseData) { courseSection in
-                    SectionView(courseSection: courseSection)
+                    GeometryReader { geometry in
+                        SectionView(courseSection: courseSection)
+                            .rotation3DEffect(
+                                Angle(degrees: Double(geometry.frame(in: .global).minX - 16) / -20),
+                                axis: (x: 0.0, y: 10.0, z: 0.0)
+                            )
+                    }
+                    .frame(width: 275, height: 275)
                 }
             }
             .padding(.top, 30)
