@@ -20,6 +20,24 @@ struct BottomCardView: View {
                 .lineSpacing(4)
                 .multilineTextAlignment(.center)
             
+            HStack(spacing: 20.0) {
+                RingView(color1: Color(#colorLiteral(red: 0.2588235438, green: 0.7568627596, blue: 0.9686274529, alpha: 1)), color2: Color(#colorLiteral(red: 0.2196078449, green: 0.007843137719, blue: 0.8549019694, alpha: 1)), width: 88, height: 88, percent: 80)
+                
+                VStack(alignment: .leading, spacing: 8) {
+                    Text("SwiftUI")
+                        .fontWeight(.bold)
+                    
+                    Text("12 of 12 sections completed\n10 hours spent so far")
+                        .font(.footnote)
+                        .foregroundColor(.gray)
+                        .lineSpacing(4)
+                }
+                .padding(20)
+                .background(Color.white)
+                .cornerRadius(20)
+                .shadow(color: Color.black.opacity(0.2), radius: 20, x: 0, y: 10)
+            }
+            
             Spacer()
         }
         .frame(maxWidth: .infinity)
