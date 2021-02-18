@@ -34,7 +34,7 @@ struct NavView: View {
                     .shadow(color: Color.black.opacity(0.2), radius: 10, x: 0, y: 10)
             })
             .sheet(isPresented: $showUpdate) {
-                CertficateView()
+                UpdateListView()
             }
             
         }
