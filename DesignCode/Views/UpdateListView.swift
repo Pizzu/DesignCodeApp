@@ -8,14 +8,29 @@
 import SwiftUI
 
 struct UpdateListView: View {
+    
+    @ObservedObject var updateStore = UpdateStore()
+    
     var body: some View {
         NavigationView {
-            List(updateData) { updateItem in
-                NavigationLink(destination: UpdateDetailView(update: updateItem)) {
-                    UpdateCellView(update: updateItem)
+            List {
+                ForEach(updateStore.updates) { updateItem in
+                    NavigationLink(destination: UpdateDetailView(update: updateItem)) {
+                        UpdateCellView(update: updateItem)
+                    }
                 }
+                .onDelete(perform: { indexSet in
+                    self.updateStore.deleteUpdate(at: indexSet.first)
+                })
+                .onMove(perform: { indices, newOffset in
+                    self.updateStore.updates.move(fromOffsets: indices, toOffset: newOffset)
+                })
             }
+            .listStyle(PlainListStyle())
             .navigationBarTitle(Text("Updates"))
+            .navigationBarItems(leading: Button(action: self.updateStore.addUpdate, label: {
+                Text("Add Update")
+            }), trailing: EditButton())
         }
     }
 }
