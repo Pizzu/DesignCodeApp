@@ -18,17 +18,23 @@ struct HomeView: View {
             Color(#colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1))
                 .edgesIgnoringSafeArea(.all)
             
-            VStack {
-                NavView(showProfile: $showProfile)
+            ScrollView {
+                VStack {
+                    NavView(showProfile: $showProfile)
+                    
+                    WatchRingsView()
+                    
+                    SectionListView()
+                    
+                    CourseListView()
+                        .offset(y: -30)
+                    
+                    Spacer()
+                }
                 
-                WatchRingsView()
-                
-                SectionListView()
-                
-                Spacer()
             }
             .padding(.top, 44)
-            .background(Color.white)
+            .background(LinearGradient(gradient: Gradient(colors: [Color("background2"), Color.white]), startPoint: .top, endPoint: .bottom))
             .clipShape(RoundedRectangle(cornerRadius: 30, style: .continuous))
             .shadow(color: Color.black.opacity(0.2), radius: 20, x: 0, y: 20)
             .offset(y: self.showProfile ? -450: 0)
