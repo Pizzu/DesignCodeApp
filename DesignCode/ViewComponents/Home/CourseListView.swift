@@ -9,7 +9,7 @@ import SwiftUI
 
 struct CourseListView: View {
     
-    @ObservedObject var sectionStore = SectionStore()
+    @ObservedObject var courseStore = CourseStore()
     
     var body: some View {
         VStack(spacing: 20.0) {
@@ -22,8 +22,8 @@ struct CourseListView: View {
             }
             .padding(.horizontal)
             
-            ForEach(sectionStore.sections) { section in
-                SectionView(section: section, width: UIScreen.main.bounds.width - 30)
+            ForEach(courseStore.courses) { course in
+                CourseView(course: course)
             }
         }
     }
