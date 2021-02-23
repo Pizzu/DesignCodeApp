@@ -12,6 +12,12 @@ struct HomeView: View {
     @State private var showProfile : Bool = false
     @State private var menuPosition : CGSize = CGSize.zero
     
+    @ObservedObject var courseStore = CourseStore()
+    @State var selectedCourse : Course? = nil
+    @State var isDisabled : Bool = false
+    @State var show : Bool = false
+    @Namespace var namespace
+    
     var body: some View {
         ZStack {
             
@@ -19,19 +25,39 @@ struct HomeView: View {
                 .edgesIgnoringSafeArea(.all)
             
             ScrollView {
-                VStack {
-                    NavView(showProfile: $showProfile)
-                    
-                    WatchRingsView()
-                    
-                    SectionListView()
-                    
-                    CourseListView()
-                        .offset(y: -30)
-                    
-                    Spacer()
-                }
+                NavView(showProfile: $showProfile)
                 
+                WatchRingsView()
+                
+                SectionListView()
+                
+                VStack(spacing: 30.0) {
+                    HStack {
+                        Text("Courses")
+                            .font(.title)
+                            .fontWeight(.bold)
+                        
+                        Spacer()
+                    }
+                    .padding(.horizontal)
+                    
+                    ForEach(courseStore.courses.indices, id: \.self) { index in
+                        
+                        VStack {
+                            CourseView(course: self.courseStore.courses[index], show: self.$show, namespace: namespace)
+                                .frame(height: 280)
+                                .onTapGesture {
+                                    withAnimation(.spring(response: 0.5, dampingFraction: 0.6, blendDuration: 0)) {
+                                        self.show = true
+                                        self.selectedCourse = self.courseStore.courses[index]
+                                        self.isDisabled = true
+                                    }
+                            }
+                        }
+                        .disabled(isDisabled)
+                        .zIndex(1.0)
+                    }
+                }
             }
             .padding(.top, 44)
             .background(LinearGradient(gradient: Gradient(colors: [Color("background2"), Color.white]), startPoint: .top, endPoint: .bottom))
@@ -40,8 +66,15 @@ struct HomeView: View {
             .offset(y: self.showProfile ? -450: 0)
             .scaleEffect(self.showProfile ? 0.9 : 1)
             .rotation3DEffect(Angle(degrees: self.showProfile ? -10 : 0), axis: (x: 10, y: 0, z: 0))
-            .animation(.spring(response: 0.5, dampingFraction: 0.6, blendDuration: 0))
+            .animation(.spring(response: 0.5, dampingFraction: 0.6, blendDuration: 0), value: self.showProfile)
             .edgesIgnoringSafeArea(.all)
+            
+            if self.show {
+                VStack {
+                    CourseDetailView(course: self.selectedCourse!, show: self.$show, namespace: namespace, selectedCourse: self.$selectedCourse, isDisabled: self.$isDisabled)
+                }
+                .zIndex(2)
+            }
             
             MenuView()
                 .offset(y: self.showProfile ? 0 : UIScreen.main.bounds.height)
