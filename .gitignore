@@ -2,6 +2,9 @@
 # Created by https://www.toptal.com/developers/gitignore/api/swift
 # Edit at https://www.toptal.com/developers/gitignore?templates=swift
 
+#Constants
+Constants.swift
+
 #Mac Os Ds store
 .DS_Store
 
