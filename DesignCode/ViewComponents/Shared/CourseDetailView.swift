@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import SDWebImageSwiftUI
 
 struct CourseDetailView: View {
     
@@ -55,7 +56,7 @@ struct CourseDetailView: View {
                     
                     Spacer()
                     
-                    self.course.image
+                    WebImage(url: self.course.image)
                         .resizable()
                         .aspectRatio(contentMode: .fit)
                         .frame(maxWidth: .infinity)
@@ -109,6 +110,6 @@ struct CourseDetailView_Previews: PreviewProvider {
     @Namespace static var namespace
     
     static var previews: some View {
-        CourseDetailView(course: courseData[1], show: .constant(true), namespace: namespace, selectedCourse: .constant(nil), isDisabled: .constant(false))
+        CourseDetailView(course: courseData[0], show: .constant(true), namespace: namespace, selectedCourse: .constant(nil), isDisabled: .constant(false))
     }
 }

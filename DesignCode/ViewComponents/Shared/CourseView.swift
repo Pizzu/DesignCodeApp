@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import SDWebImageSwiftUI
 
 struct CourseView: View {
     
@@ -30,14 +31,17 @@ struct CourseView: View {
                 Spacer()
                 
                 ZStack {
-                    Image(self.course.logo)
+                    WebImage(url: self.course.logo)
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .frame(width: 45, height: 45)
                         .matchedGeometryEffect(id: "logo\(course.id)", in: namespace)
                 }
             }
             
             Spacer()
             
-            self.course.image
+            WebImage(url: self.course.image)
                 .resizable()
                 .aspectRatio(contentMode: .fit)
                 .frame(maxWidth: .infinity)
@@ -65,7 +69,7 @@ struct CourseView_Previews: PreviewProvider {
     @Namespace static var namespace
     
     static var previews: some View {
-        CourseView(course: courseData[1], show: .constant(false), namespace: namespace)
+        CourseView(course: courseData[0], show: .constant(false), namespace: namespace)
     }
 }
 
