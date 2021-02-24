@@ -26,8 +26,9 @@ struct SectionListView: View {
                     .frame(width: 275, height: 275)
                 }
             }
+            .padding(.top, 20)
             .padding(.horizontal)
-            .padding(.bottom, 50)
+            .padding(.bottom, 60)
         }
     }
 }

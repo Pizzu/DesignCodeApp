@@ -40,7 +40,7 @@ struct SectionView: View {
         .frame(width: self.width, height: self.height)
         .background(self.section.color)
         .cornerRadius(30)
-        .shadow(color: self.section.color.opacity(0.3), radius: 20, x: 0, y: 20)
+        .shadow(color: self.section.color.opacity(0.2), radius: 15, x: 0, y: 20)
     }
 }
 
