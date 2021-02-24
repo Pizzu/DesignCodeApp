@@ -24,21 +24,21 @@ struct WatchRingsView: View {
                     }
                 }
                 .padding(8)
-                .background(Color.white)
+                .background(Color("background3"))
                 .cornerRadius(20)
                 .shadow(color: Color.black.opacity(0.2), radius: 10, x: 0, y: 10)
                 .shadow(color: Color.black.opacity(0.1), radius: 1, x: 0, y: 1)
                 
                 RingView(color1: Color(#colorLiteral(red: 0.2588235438, green: 0.7568627596, blue: 0.9686274529, alpha: 1)), color2: Color(#colorLiteral(red: 0.2196078449, green: 0.007843137719, blue: 0.8549019694, alpha: 1)), width: 32, height: 32, percent: 80)
                     .padding(8)
-                    .background(Color.white)
+                    .background(Color("background3"))
                     .cornerRadius(20)
                     .shadow(color: Color.black.opacity(0.2), radius: 10, x: 0, y: 10)
                     .shadow(color: Color.black.opacity(0.1), radius: 1, x: 0, y: 1)
                 
                 RingView(color1: Color(#colorLiteral(red: 0.5568627715, green: 0.3529411852, blue: 0.9686274529, alpha: 1)), color2: Color(#colorLiteral(red: 0.2196078449, green: 0.007843137719, blue: 0.8549019694, alpha: 1)), width: 35, height: 35, percent: 75)
                     .padding(8)
-                    .background(Color.white)
+                    .background(Color("background3"))
                     .cornerRadius(20)
                     .shadow(color: Color.black.opacity(0.2), radius: 10, x: 0, y: 10)
                     .shadow(color: Color.black.opacity(0.1), radius: 1, x: 0, y: 1)

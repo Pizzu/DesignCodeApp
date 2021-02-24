@@ -11,7 +11,6 @@ import SDWebImageSwiftUI
 struct CourseView: View {
     
     var course : Course
-    @Binding var show : Bool
     var namespace : Namespace.ID
     
     var body: some View {
@@ -69,7 +68,7 @@ struct CourseView_Previews: PreviewProvider {
     @Namespace static var namespace
     
     static var previews: some View {
-        CourseView(course: courseData[0], show: .constant(false), namespace: namespace)
+        CourseView(course: courseData[0], namespace: namespace)
     }
 }
 

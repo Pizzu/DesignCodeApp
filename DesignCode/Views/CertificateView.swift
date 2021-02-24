@@ -18,6 +18,8 @@ struct CertficateView: View {
     var body: some View {
         ZStack {
             
+            Color("background3").ignoresSafeArea()
+            
             TitleView()
                 .blur(radius: self.showOnDrag ? 20 : 0)
                 .opacity(self.showCard ? 0.4 : 1)

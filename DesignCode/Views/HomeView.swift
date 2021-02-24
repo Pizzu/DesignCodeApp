@@ -21,7 +21,7 @@ struct HomeView: View {
     var body: some View {
         ZStack {
             
-            Color(#colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1))
+            Color("background2")
                 .edgesIgnoringSafeArea(.all)
             
             ScrollView {
@@ -44,7 +44,7 @@ struct HomeView: View {
                     ForEach(courseStore.courses.indices, id: \.self) { index in
                         
                         VStack {
-                            CourseView(course: self.courseStore.courses[index], show: self.$show, namespace: namespace)
+                            CourseView(course: self.courseStore.courses[index], namespace: namespace)
                                 .frame(height: 280)
                                 .onTapGesture {
                                     withAnimation(.spring(response: 0.5, dampingFraction: 0.6, blendDuration: 0)) {
@@ -57,10 +57,12 @@ struct HomeView: View {
                         .disabled(isDisabled)
                         .zIndex(1.0)
                     }
+                    
                 }
+                .padding(.bottom, 90)
             }
             .padding(.top, 44)
-            .background(LinearGradient(gradient: Gradient(colors: [Color("background2"), Color.white]), startPoint: .top, endPoint: .bottom))
+            .background(LinearGradient(gradient: Gradient(colors: [Color("background2"), Color("background1")]), startPoint: .top, endPoint: .bottom))
             .clipShape(RoundedRectangle(cornerRadius: 30, style: .continuous))
             .shadow(color: Color.black.opacity(0.2), radius: 20, x: 0, y: 20)
             .offset(y: self.showProfile ? -450: 0)

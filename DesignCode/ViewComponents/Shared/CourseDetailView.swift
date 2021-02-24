@@ -89,7 +89,8 @@ struct CourseDetailView: View {
                     Text("Minimal coding experience required, such as in HTML and CSS. Please note that Xcode 11 and Catalina are essential. Once you get everything installed, it'll get a lot friendlier! I added a bunch of troubleshoots at the end of this page to help you navigate the issues you might encounter.")
                 }
                 .padding(.horizontal, 30)
-                .padding(.vertical, 20)
+                .padding(.vertical, 30)
+                .padding(.bottom, 60)
                 .offset(y: self.showText ? 0 : -150)
             }
         }

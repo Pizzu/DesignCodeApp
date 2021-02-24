@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import SwiftUIX
 
 struct BottomCardView: View {
     var body: some View {
@@ -33,7 +34,7 @@ struct BottomCardView: View {
                         .lineSpacing(4)
                 }
                 .padding(20)
-                .background(Color.white)
+                .background(Color("background3"))
                 .cornerRadius(20)
                 .shadow(color: Color.black.opacity(0.2), radius: 20, x: 0, y: 10)
             }
@@ -43,7 +44,7 @@ struct BottomCardView: View {
         .frame(maxWidth: .infinity)
         .padding(.top, 8)
         .padding(.horizontal, 20)
-        .background(Color.white)
+        .background(VisualEffectBlurView(blurStyle: .systemThinMaterial))
         .cornerRadius(30)
         .shadow(radius: 20)
     }
