@@ -8,17 +8,28 @@
 import SwiftUI
 
 struct TabBar: View {
+    
+    @Namespace var namespace
+    var courseStore = CourseStore()
+    
     var body: some View {
         TabView {
             HomeView().tabItem {
                 Image(systemName: "house.circle.fill")
                 Text("Home")
             }
-            CertficateView().tabItem {
+            
+            CourseListView().tabItem {
                 Image(systemName: "rectangle.stack.fill")
+                Text("Courses")
+            }
+            
+            CertficateView().tabItem {
+                Image(systemName: "graduationcap.fill")
                 Text("Certificates")
             }
         }
+        .environmentObject(courseStore)
     }
 }
 

@@ -9,14 +9,16 @@ import SwiftUI
 
 struct HomeView: View {
     
+    @Namespace var namespace
+    
     @State private var showProfile : Bool = false
     @State private var menuPosition : CGSize = CGSize.zero
     
-    @ObservedObject var courseStore = CourseStore()
+    @EnvironmentObject var courseStore : CourseStore
     @State var selectedCourse : Course? = nil
     @State var isDisabled : Bool = false
     @State var show : Bool = false
-    @Namespace var namespace
+    
     
     var body: some View {
         ZStack {
@@ -44,7 +46,7 @@ struct HomeView: View {
                     ForEach(courseStore.courses.indices, id: \.self) { index in
                         
                         VStack {
-                            CourseView(course: self.courseStore.courses[index], namespace: namespace)
+                            CourseView(course: self.courseStore.courses[index], namespace: self.namespace)
                                 .frame(height: 280)
                                 .onTapGesture {
                                     withAnimation(.spring(response: 0.5, dampingFraction: 0.6, blendDuration: 0)) {
@@ -73,7 +75,7 @@ struct HomeView: View {
             
             if self.show {
                 VStack {
-                    CourseDetailView(course: self.selectedCourse!, show: self.$show, namespace: namespace, selectedCourse: self.$selectedCourse, isDisabled: self.$isDisabled)
+                    CourseDetailView(course: self.selectedCourse!, show: self.$show, namespace: self.namespace, selectedCourse: self.$selectedCourse, isDisabled: self.$isDisabled)
                 }
                 .zIndex(2)
             }
@@ -101,6 +103,6 @@ struct HomeView: View {
 
 struct HomeView_Previews: PreviewProvider {
     static var previews: some View {
-        HomeView()
+        HomeView().environmentObject(CourseStore())
     }
 }

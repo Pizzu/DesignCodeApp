@@ -19,13 +19,14 @@ struct CourseView: View {
             HStack(alignment: .top) {
                 VStack(alignment: .leading, spacing: 8.0) {
                     Text(self.course.title)
+                        .matchedGeometryEffect(id: "title\(course.id)", in: namespace)
                         .font(.system(size: 24, weight: .bold))
                         .foregroundColor(Color.white)
                     
                     Text(self.course.subtitle)
+                        .matchedGeometryEffect(id: "subtitle\(course.id)", in: namespace)
                         .foregroundColor(.white)
                 }
-                .matchedGeometryEffect(id: "title\(course.id)", in: namespace)
                 
                 Spacer()
                 

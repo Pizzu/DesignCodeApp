@@ -24,14 +24,15 @@ struct CourseDetailView: View {
                     HStack(alignment: .top) {
                         VStack(alignment: .leading, spacing: 8.0) {
                             Text(self.course.title)
+                                .matchedGeometryEffect(id: "title\(course.id)", in: namespace)
                                 .font(.system(size: 24, weight: .bold))
                                 .foregroundColor(Color.white)
                             
                             Text(self.course.subtitle)
+                                .matchedGeometryEffect(id: "subtitle\(course.id)", in: namespace)
                                 .foregroundColor(.white)
                         }
-                        .matchedGeometryEffect(id: "title\(course.id)", in: namespace)
-                        
+                       
                         Spacer()
                         
                         ZStack {
@@ -71,7 +72,7 @@ struct CourseDetailView: View {
                 .background(
                     self.course.color
                         .clipShape(RoundedRectangle(cornerRadius: 30, style: .continuous))
-                        .matchedGeometryEffect(id: "background\(course.id)", in: namespace)
+                        .matchedGeometryEffect(id: "background\(course.id)", in: namespace, properties: .frame)
                 )
                 .shadow(color: self.course.color.opacity(0.3), radius: 20, x: 0, y: 20)
                 .zIndex(1.0)
