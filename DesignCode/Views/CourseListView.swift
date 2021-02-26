@@ -18,6 +18,9 @@ struct CourseListView: View {
     
     var body: some View {
         ZStack {
+            
+            Color("background1").ignoresSafeArea()
+            
             ScrollView {
                 VStack(spacing: 30.0) {
                     HStack {
@@ -63,6 +66,7 @@ struct CourseListView: View {
 
 struct CourseListView_Previews: PreviewProvider {
     static var previews: some View {
-        CourseListView().environmentObject(CourseStore())
+        CourseListView()
+            .environmentObject(CourseStore())
     }
 }
