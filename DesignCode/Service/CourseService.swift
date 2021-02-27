@@ -13,7 +13,7 @@ class CourseService {
     static let instance = CourseService()
     let client : Client
     
-    init() {
+    private init() {
         client = Client(spaceId: SPACE_ID, accessToken: TOKEN)
     }
     

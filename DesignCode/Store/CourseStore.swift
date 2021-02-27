@@ -34,6 +34,5 @@ class CourseStore : ObservableObject {
             }
         }
     }
-    
 }
 

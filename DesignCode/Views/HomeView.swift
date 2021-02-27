@@ -15,9 +15,9 @@ struct HomeView: View {
     @State private var menuPosition : CGSize = CGSize.zero
     
     @EnvironmentObject var courseStore : CourseStore
-    @State var selectedCourse : Course? = nil
-    @State var isDisabled : Bool = false
-    @State var show : Bool = false
+    @State private var selectedCourse : Course? = nil
+    @State private var isDisabled : Bool = false
+    @State private var show : Bool = false
     
     
     var body: some View {

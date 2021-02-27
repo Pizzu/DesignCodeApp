@@ -13,7 +13,7 @@ struct CourseDetailView: View {
     var course : Course
     @Binding var show : Bool
     var namespace : Namespace.ID
-    @State var showText : Bool = false
+    @State private var showText : Bool = false
     @Binding var selectedCourse : Course?
     @Binding var isDisabled : Bool
     
