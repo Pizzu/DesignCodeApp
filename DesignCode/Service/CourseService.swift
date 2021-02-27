@@ -11,7 +11,7 @@ import Contentful
 class CourseService {
     
     static let instance = CourseService()
-    let client : Client
+    private let client : Client
     
     private init() {
         client = Client(spaceId: SPACE_ID, accessToken: TOKEN)
