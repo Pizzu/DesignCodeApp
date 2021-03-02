@@ -14,6 +14,8 @@ struct AuthView: View {
     @State private var isFocus : Bool = false
     @State private var showAlert : Bool = false
     @State private var alertMessage : String = "Something went wrong!"
+    @State private var isLoading : Bool = false
+    @State private var isSuccessful : Bool = false
     
     //Login State
     @State private var loginEmail : String = ""
