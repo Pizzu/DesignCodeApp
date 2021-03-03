@@ -13,7 +13,7 @@ struct AuthView: View {
     @State private var isSignup : Bool = false
     @State private var isFocus : Bool = false
     @State private var showAlert : Bool = false
-    @State private var alertMessage : String = "Something went wrong!"
+    @State private var alertMessage : String = ""
     @State private var isLoading : Bool = false
     @State private var isSuccessful : Bool = false
     
@@ -55,9 +55,9 @@ struct AuthView: View {
                     Spacer()
                     
                     if self.isSignup {
-                        SignupButtons(isSignup: self.$isSignup, showAlert: self.$showAlert, alertMessage: self.$alertMessage, isFocus: self.$isFocus)
+                        SignupButtons(username: self.$signupUsername, email: self.$signupEmail, password: self.$signupPassword, isSignup: self.$isSignup, showAlert: self.$showAlert, alertMessage: self.$alertMessage, isFocus: self.$isFocus, isLoading: self.$isLoading, isSuccesful: self.$isSuccessful)
                     } else {
-                        LoginButtons(isSignup: self.$isSignup, showAlert: self.$showAlert, alertMessage: self.$alertMessage, isFocus: self.$isFocus)
+                        LoginButtons(email: self.$loginEmail, password: self.$loginPassword, isSignup: self.$isSignup, showAlert: self.$showAlert, alertMessage: self.$alertMessage, isFocus: self.$isFocus, isLoading: self.$isLoading, isSuccesful: self.$isSuccessful)
                     }
                     
                 }
@@ -70,6 +70,14 @@ struct AuthView: View {
                 self.hideKeyboard()
             }
             .ignoresSafeArea(.keyboard, edges: .bottom)
+            
+            if self.isLoading {
+                LoadingView()
+            }
+            
+            if self.isSuccessful {
+                SuccessView()
+            }
         }
     }
 }
