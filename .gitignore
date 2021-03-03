@@ -5,6 +5,9 @@
 #Constants
 Constants.swift
 
+#Firebase
+GoogleService-Info.plist
+
 #Mac Os Ds store
 .DS_Store
 
