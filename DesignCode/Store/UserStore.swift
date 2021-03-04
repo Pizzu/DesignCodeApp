@@ -11,33 +11,42 @@ import Firebase
 
 class UserStore : ObservableObject {
     
-    @Published var currentUser : User? = nil
+    @Published var currentUser : User?
+    @Published var isLogged : Bool = UserDefaults.standard.bool(forKey: "isLogged") {
+        didSet {
+            UserDefaults.standard.set(self.isLogged, forKey: "isLogged")
+        }
+    }
     
     private let auth : Auth = Auth.auth()
     private let db : Firestore = Firestore.firestore()
     
-    //Listen for user change
-    func listen() {
-        auth.addStateDidChangeListener { (auth, user) in
-            if let user = user {
-                let userRef = self.db.collection("users").document(user.uid)
-                userRef.getDocument { (document, error) in
-                    if let document = document, document.exists {
-                        guard let data = document.data() else {return}
-                        
-                        let id = document.documentID
-                        let username = data["username"] as? String ?? ""
-                        let email = data["email"] as? String ?? ""
-                        
-                        self.currentUser = User(id: id, username: username, email: email)
-                        
-                    } else {
-                        self.currentUser = nil
-                    }
+    //Get Current User
+    func getCurrentUser() {
+        if let user = auth.currentUser {
+            print("Logged")
+            let userRef = self.db.collection("users").document(user.uid)
+            userRef.getDocument { (document, error) in
+                if let document = document, document.exists {
+                    guard let data = document.data() else {return}
+                    
+                    let id = document.documentID
+                    let username = data["username"] as? String ?? ""
+                    let email = data["email"] as? String ?? ""
+                    
+                    self.currentUser = User(id: id, username: username, email: email)
+                    self.isLogged = true
+                    
+                } else {
+                    print("Not Logged")
+                    self.currentUser = nil
+                    self.isLogged = false
                 }
-            } else {
-                self.currentUser = nil
             }
+        } else {
+            print("Not Logged")
+            self.currentUser = nil
+            self.isLogged = false
         }
     }
     
@@ -50,8 +59,7 @@ class UserStore : ObservableObject {
                     completion(FireAuthResponse(result: nil, errorMessage: errorMessage))
                 }
             } else {
-                let user = self.createUserDocument(username: username, result: result)
-                self.currentUser = user
+                self.createUserDocument(username: username, result: result)
                 DispatchQueue.main.async {
                     completion(FireAuthResponse(result: result, errorMessage: nil))
                 }
@@ -59,7 +67,7 @@ class UserStore : ObservableObject {
         }
     }
     
-    private func createUserDocument(username: String, result: AuthDataResult?) -> User? {
+    private func createUserDocument(username: String, result: AuthDataResult?) {
         if let user = result?.user {
             let newUserRef = self.db.collection("users").document(user.uid)
             let newUser = User(id: newUserRef.documentID, username: username, email: user.email ?? "")
@@ -72,9 +80,7 @@ class UserStore : ObservableObject {
                 newUserRef.setData(data)
                }
            }
-            return newUser
         }
-        return nil
     }
     
     //Sign in user
@@ -103,6 +109,16 @@ class UserStore : ObservableObject {
         return ""
     }
     
+    // Logout
+    func logout() {
+        do {
+            try auth.signOut()
+            self.isLogged = false
+        } catch {
+            print(self.handleFirebaseAuthError(error: error))
+        }
+        
+    }
 
     
 }

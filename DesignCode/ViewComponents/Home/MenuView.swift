@@ -9,6 +9,9 @@ import SwiftUI
 import SwiftUIX
 
 struct MenuView: View {
+    
+    @EnvironmentObject var userStore : UserStore
+    
     var body: some View {
         VStack {
             
@@ -16,7 +19,7 @@ struct MenuView: View {
             
             VStack(spacing: 16.0) {
                 
-                Text("Luca - 28% completed")
+                Text("\(userStore.currentUser?.username ?? "Luca") - 28% completed")
                     .font(.caption)
                 
                 Color.white
@@ -34,6 +37,9 @@ struct MenuView: View {
                 MenuRowView(title: "Account", iconName: "gear")
                 MenuRowView(title: "Billing", iconName: "creditcard")
                 MenuRowView(title: "Sign Out", iconName: "person.crop.circle")
+                    .onTapGesture {
+                        self.userStore.logout()
+                    }
             }
             .frame(maxWidth: .infinity)
             .frame(height: 300)
@@ -56,7 +62,7 @@ struct MenuView: View {
 
 struct MenuView_Previews: PreviewProvider {
     static var previews: some View {
-        MenuView()
+        MenuView().environmentObject(UserStore())
     }
 }
 

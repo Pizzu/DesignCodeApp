@@ -36,6 +36,7 @@ struct LoginButtons: View {
                     self.isSuccesful = false
                     self.email = ""
                     self.password = ""
+                    self.userStore.getCurrentUser()
                 }
             }
         }

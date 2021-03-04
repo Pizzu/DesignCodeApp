@@ -39,6 +39,7 @@ struct SignupButtons: View {
                     self.username = ""
                     self.email = ""
                     self.password = ""
+                    self.userStore.getCurrentUser()
                 }
             }
         }
