@@ -114,6 +114,7 @@ class UserStore : ObservableObject {
         do {
             try auth.signOut()
             self.isLogged = false
+            self.currentUser = nil
         } catch {
             print(self.handleFirebaseAuthError(error: error))
         }

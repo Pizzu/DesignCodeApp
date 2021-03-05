@@ -9,7 +9,6 @@ import SwiftUI
 
 struct TabBar: View {
     
-    @Namespace var namespace
     var courseStore = CourseStore()
     
     var body: some View {
